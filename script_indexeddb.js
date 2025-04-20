@@ -332,7 +332,7 @@ async function populateDefaultData() {
       {name:"יין רוזה חצי יבש", category:"Roses", price:50, pic:"imgs/roses/rose2-2020.png", origin:"ייקבי ישראל, ישראל"},
       {name:"יין רוזה חצי יבש- 2016", category:"Roses", price:50, pic:"imgs/roses/rose2016.png", origin:"ייקבי ישראל, ישראל"},
       {name:"יין רוזה יבש", category:"Roses", price:50, pic:"imgs/roses/rose2020.png", origin:"ייקבי ישראל, ישראל"},
-      {name:"יין רוזה מבעבע ", category:"Roses", price:50, pic:"imgs/roses/rose2021.png", origin:"ייקבי ישראל, ישראל"},
+      {name:"שאטו טרבון פרובנס רוזה", category:"Roses", price:79.9, pic:"imgs/roses/ting_rose.webp", origin:"צרפת"},
       {name:"יין הר חרמון רוזה", category:"Roses", price:37.9, pic:"imgs/roses/hrmn_rose.webp", origin:"רמת הגולן, ישראל"},
       {name:"עברי רוזה", category:"Roses", price:55.9, pic:"imgs/roses/hebrew_rose.webp", origin:"ישראל"},
       {name:"יין רוזה אימפרשן", category:"Roses", price:51.9, pic:"imgs/roses/trpc_rose.webp", origin:"עמק אילון, ישראל"},
