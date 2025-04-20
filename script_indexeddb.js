@@ -302,3 +302,54 @@ async function checkLoginStatus(options = {}) {
     }
 }
  
+
+//ניצור מוצרי בסיס שיהיו קיימים ברגע שנריץ את האתר.
+async function populateDefaultData() {
+  // בדיקה אם כבר יש מוצרים
+  const existingItems = await db.items.toArray();
+  if (existingItems.length === 0) {
+    await db.items.bulkAdd([
+      {name:"ברקן קלאסיק קברנה", category:"Reds", price: 35.9, pic:"imgs/reds/brkn.webp", origin:"גליל עליון, ישראל"},
+      {name:"יין אדום שאטו", category:"Reds", price: 50, pic:"imgs/reds/cha_car.jpg", origin:"ייקבי כרמל, ישראל"},
+      {name:"מונטרו קיאנטי", category:"Reds", price: 59.9, pic:"imgs/reds/chi.jpg", origin:"טוסקנה, איטליה"},
+      {name:"קברנה סוביניון ירושליים", category:"Reds", price: 55, pic:"imgs/reds/cs_jer.jpg", origin:"יקב ירושליים, ישראל"},
+      {name:"יין אדום יבש של סגל", category:"Reds", price: 21.9, pic:"imgs/reds/dry_seg.webp", origin:"שפלת יהודה, ישראל"},
+      {name:"אסמבלאז איתן", category:"Reds", price: 65, pic:"imgs/reds/itan_brkn.webp", origin:"שפלת יהודה, ישראל"},
+      {name:"דלתון כנען אדום", category:"Reds", price: 50, pic:"imgs/reds/KNAAN_red.png", origin:"גליל עליון, ישראל"},
+      {name:"לוטם אדום 2021", category:"Reds", price: 85, pic:"imgs/reds/ltm.jpeg", origin:"הר מירון, ישראל"},
+      {name:"יין אדום יבש נטע", category:"Reds", price:70, pic:"imgs/reds/neta.jpg", origin:"ייקבי נטע, ישראל"},
+      {name:"יין אדום סטה ויניה", category:"Reds", price:75, pic:"imgs/reds/vin_itly.jpg", origin:"איטליה"},
+      
+      {name:"גוורצטרמינר ריזלינג- בלו נאן", category:"Whites", price:51.9, pic:"imgs/whites/blue_nan.webp", origin:"גרמניה"},
+      {name:"גוורצטרמינר ספיישל רזרב", category:"Whites", price:70, pic:"imgs/whites/g_s_r.webp", origin:"גליל עליון והרי ירושלים"},
+      {name:"יין לבן חצי יבש של סגל", category:"Whites", price:21.9, pic:"imgs/whites/h_dry_sgv.webp", origin:"שפלת יהודה, ישראל"},
+      {name:"עברי שרדונה", category:"Whites", price:55, pic:"imgs/whites/hebrew_s.webp", origin:"ישראל"},
+      {name:"מאד האוס סוביניון בלאן", category:"Whites", price:74.9, pic:"imgs/whites/mh_sb.webp", origin:"ניו זילנד"},
+      {name:"יין לבן הר חרמון", category:"Whites", price:37.9, pic:"imgs/whites/mnt_her.webp", origin:"רמת גולן, ישראל"},
+      {name:"יין לבן שרדונה קלאסיק", category:"Whites", price:35.9, pic:"imgs/whites/srdn_brkn.webp", origin:"גליל עליון והרי ירושלים"},
+      {name:"טורס דה אספניה בלאנקו", category:"Whites", price: 44.9, pic:"imgs/whites/tte_b.webp", origin:"ספרד"},
+
+      {name:"יין רוזה חצי יבש", category:"Roses", price:50, pic:"imgs/roses/rose2-2020.png", origin:"ייקבי ישראל, ישראל"},
+      {name:"יין רוזה חצי יבש- 2016", category:"Roses", price:50, pic:"imgs/roses/rose2016.png", origin:"ייקבי ישראל, ישראל"},
+      {name:"יין רוזה יבש", category:"Roses", price:50, pic:"imgs/roses/rose2020.png", origin:"ייקבי ישראל, ישראל"},
+      {name:"יין רוזה מבעבע ", category:"Roses", price:50, pic:"imgs/roses/rose2021.png", origin:"ייקבי ישראל, ישראל"},
+      {name:"יין הר חרמון רוזה", category:"Roses", price:37.9, pic:"imgs/roses/hrmn_rose.webp", origin:"רמת הגולן, ישראל"},
+      {name:"עברי רוזה", category:"Roses", price:55.9, pic:"imgs/roses/hebrew_rose.webp", origin:"ישראל"},
+      {name:"יין רוזה אימפרשן", category:"Roses", price:51.9, pic:"imgs/roses/trpc_rose.webp", origin:"עמק אילון, ישראל"},
+      {name:"רוזה רזרב גולד ברקן", category:"Roses", price:50, pic:"imgs/roses/rsrv_brkn_rose.webp", origin:"כרם עלמה, גליל עליון"},
+    ]);
+  }
+
+  // בדיקה אם יש משתמש admin
+  const adminExists = await db.users.get("admin");
+  if (!adminExists) {
+    await db.users.put({
+      username: "Manager123",
+      password: "Manager123",
+      email: "Manager123@wine.com"
+    });
+  }
+}
+document.addEventListener("DOMContentLoaded", async () => {
+  await populateDefaultData();
+});
