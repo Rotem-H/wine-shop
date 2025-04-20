@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wine & Co. - Admin</title>
+  <link rel="icon" type="image/png" href="imgs/icon1.jpg">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      direction: rtl;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      font-family: Arial, sans-serif;
+    }
+  
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px 10px;
+      text-align: center;
+    }
+  
+    th {
+      background-color: #6f1d1b;
+      color: white;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #f1f1f1;
+    }
+  
+    caption {
+      font-size: 24px;
+      font-weight: bold;
+      padding: 10px;
+    }
+  </style>
+  
+</head>
+<body>
+  <header style="width: 20%; border: 2px solid black;">
+    <nav style="float: inline-start;">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="singin.html">Signin</a></li>
+        <li><a href="redwines.html">Reds</a></li>
+        <li><a href="whitewines.html">Whites</a></li>
+        <li><a href="rosewines.html">Roses</a></li>
+        <li><a href="checkOut.html">Checkout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 style="text-align: center; font-size: 100px;">דף מנהלים</h1>
+
+    <!-- טופס הוספת מוצר -->
+    <form id="new-item" onsubmit="addItem(event)" style="text-align: center;">
+      <h2>הוספת מוצר</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required /><br />
+      <label for="price">Price:</label>
+      <input type="text" id="price" name="price" required /><br />
+      <label for="pic">Pic:</label>
+      <input type="file" id="pic" name="pic" accept="image/*" required /><br />
+      <label for="origin">Origin:</label>
+      <input type="text" id="origin" name="origin" required /><br />
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        <option value="Reds">Reds</option>
+        <option value="Whites">Whites</option>
+        <option value="Roses">Roses</option>
+      </select><br />
+      <button type="submit">הוספה</button>
+    </form>
+
+    <!-- טופס מחיקת מוצר -->
+    <form id="delete-item" onsubmit="deleteItem(event)" style="text-align: center;">
+      <h2>מחיקת מוצר</h2>
+      <label for="name1">Name:</label>
+      <input type="text" id="name1" name="name1" required />
+      <br />
+      <button type="submit">מחיקה</button>
+    </form>
+
+    <!-- טבלת הזמנות -->
+    <h2>הזמנות שהתקבלו</h2>
+    <table id="orders-table">
+      <thead>
+        <tr>
+          <th>שם משתמש</th>
+          <th>אימייל</th>
+          <th>כתובת</th>
+          <th>פריטים</th>
+          <th>סה״כ</th>
+          <th>משלוח</th>
+          <th>כרטיס</th>
+          <th>תוקף</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    
+
+    <!-- תצוגת המוצרים -->
+    <section style="text-align:center;">
+      <h2>רשימת מוצרים נוכחית</h2>
+      <div id="admin-items-list" style="margin: 20px auto; max-width: 600px;"></div>
+    </section>
+  </main>
+
+  <!-- סקריפטים -->
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <script src="script_indexeddb.js"></script>
+  <script>
+    //מחיקת מוצר- טופס מנהלים
+    async function deleteItem(event) {
+        event.preventDefault();
+      
+        const nameToDelete = document.getElementById("name1").value;
+        const allItems = await db.items.toArray();
+        const match = allItems.find(item => item.name === nameToDelete);
+      
+        if (match) {
+          await db.items.delete(match.id);
+          alert("המוצר נמחק!");
+        } else {
+          alert("המוצר לא נמצא!");
+        }
+      
+        event.target.reset();
+        refreshAdminView(); // מציג מחדש את הרשימה למחוק בסוףףף
+    }
+    //הוספת מוצר- טופס מנהלים
+    async function addItem(event) {
+        event.preventDefault();
+      
+        const name = document.getElementById("name").value;
+        const price = parseFloat(document.getElementById("price").value);
+        const origin = document.getElementById("origin").value;
+        const category = document.getElementById("category").value;
+        const fileInput = document.getElementById("pic");
+        const file = fileInput.files[0];
+      
+        if (!file) {
+          alert("יש לבחור תמונה!");
+          return;
+        }
+      
+        const reader = new FileReader();
+        reader.onload = async function () {
+          const base64Image = reader.result;
+      
+          await db.items.add({
+            name,
+            price,
+            origin,
+            category,
+            pic: base64Image
+          });
+      
+          alert("המוצר נוסף בהצלחה!");
+          event.target.reset();
+          refreshAdminView(); 
+        };
+      
+        reader.readAsDataURL(file);
+    } 
+    //מציג את טבלת מוצרים בטופס מנהלים
+    async function refreshAdminView() {
+        const items = await db.items.toArray();
+        const list = document.getElementById("admin-items-list");
+        if (!list) return;
+      
+        list.innerHTML = "";
+        items.forEach(item => {
+          const div = document.createElement("div");
+          div.style.border = "1px solid #ccc";
+          div.style.padding = "10px";
+          div.style.margin = "10px";
+          div.innerHTML = `
+            <img src="${item.pic}" alt="${item.name}" style="height: 50px;"><br>
+            <strong>${item.name}</strong><br>
+            מחיר: ${item.price}₪ | מקור: ${item.origin} | קטגוריה: ${item.category}
+          `;
+          list.appendChild(div);
+        });
+    }
+    document.addEventListener("DOMContentLoaded", refreshAdminView); 
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const orders = await db.orders.toArray();
+      const tableBody = document.querySelector("#orders-table tbody");
+
+      orders.forEach(order => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${order.username}</td>
+          <td>${order.email}</td>
+          <td>${order.address}</td>
+          <td>${order.items}</td>
+          <td>₪${order.totalCost}</td>
+          <td>${order.shippingMethod}</td>
+          <td>${order.cardNumber}</td>
+          <td>${order.expiryDate}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    });
+
+
+  </script>
+</body>
+</html>

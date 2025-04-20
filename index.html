@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wine & Co.</title>
+  <link rel="icon" type="image/png" href="imgs/icon1.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <header>
+        <div h1="div1" style="height: 30px; text-align: center; background-color: #6B705C; width: 100%; ">
+          <marquee direction="right" scrollamount="10">
+              <id style="color: #D7D1C6; text-align: right; font-size: 15px; font-family: Calibri">★ משלוח חינם בקניה מעל 250 שקלים | 15% הנחה למצטרפות חדשות ★ </id>
+          </marquee>
+        </div>
+        <div class="navbar">
+            <!-- Left Section: Cart and User Icons -->
+            <div class="left-section">
+                <a href="cart.html" class="icon-link">
+                    <i class="fas fa-shopping-bag"></i> <!-- Font Awesome Cart Icon -->
+                </a>
+                <a href="singin.html" class="icon-link">
+                    <i class="fas fa-user"></i> <!-- Font Awesome User Icon -->
+                </a>
+            </div>
+            <!-- Center Section: Logo -->
+            <div class="center-section">
+                <a href="index.html"><img src="imgs/logo1.png" style=" height: 30%; " alt="Logo" class="logo" /></a>
+            </div>
+            <div class="right-section">
+                <div style="color: #82152f;" class="icon-link"  title="התנתקות" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </div>                  
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div h1="div1" style="width:100%; text-align:center; background-color:#D7D1C6 ; border-top: double #6B705C; ">
+            
+            <table align="center" style="width: 35%; ">
+                <tr>
+                    <th><a href="whitewines.html"><h1 style="font-size: 21px; font-family: Calibri; width: 100px ">יין לבן</h1></a></th> 
+                    <th><a href="redwines.html"><h1 style="font-size: 21px; font-family: Calibri; width: 100px ">יין אדום</h1></a></th>
+                    <th><a href="rosewines.html"><h1 style="font-size: 21px; font-family: Calibri; width: 100px ">יין רוזה</h1></a></th>
+                </tr>
+            </table>
+        </div>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="imgs/gallery/three1.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="imgs/gallery/red-white1.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="imgs/gallery/rose1.png" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="imgs/gallery/rose2.png" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="imgs/gallery/white1.png" style="width:100%">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+      
+        <div h1="div1" style="width:100%;  text-align:center; background-color:#5E4B3C ; ">
+            <h2 style="color: antiquewhite; font-size: 18px; font-family: Calibri; text-align: center; margin: 0px">
+                🍷<br>Wine & Co.<br>© 2025 by rotem horner</h2><br>
+        </div>
+    
+    
+    </main>
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <script src="script_indexeddb.js"></script>
+    <script>
+        //מציג את הגלריית תמונות בעמוד
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        }
+        function showSlides(n) {
+        let slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+        }
+    </script>
+</body>
+</html>
