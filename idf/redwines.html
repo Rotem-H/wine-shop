@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Wine & Co.</title>
+    <link rel="icon" type="image/png" href="imgs/icon1.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        #cart-items ,#cart-container{
+             flex-wrap: wrap;        /* שורה חדשה אחרי 2 פריטים */
+            justify-content: center;/
+        }
+        .cart-item{
+            flex: 0 0 calc(50% - 20px); /* שניים בשורה */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div h1="div1" style="height: 30px; text-align: center; background-color: #6B705C; width: 100%; ">
+          <marquee direction="right" scrollamount="10">
+              <id style="color: #D7D1C6; text-align: right; font-size: 15px; font-family: Calibri">★ משלוח חינם בקניה מעל 250 שקלים | 15% הנחה למצטרפות חדשות ★ </id>
+          </marquee>
+        </div>
+        <div class="navbar">
+            <!-- Left Section: Cart and User Icons -->
+            <div class="left-section">
+                <a href="cart.html" class="icon-link">
+                    <i class="fas fa-shopping-bag"></i> <!-- Font Awesome Cart Icon -->
+                </a>
+                <a href="singin.html" class="icon-link">
+                    <i class="fas fa-user"></i> <!-- Font Awesome User Icon -->
+                </a>
+                
+            </div>
+        
+            <!-- Center Section: Logo -->
+            <div class="center-section">
+                <a href="homepage.html"><img src="imgs/logo1.png" style=" width: 50%; " alt="Logo" class="logo" /></a>
+            </div>
+        
+            <!-- Right Section: Search Bar -->
+            <div class="right-section">
+                <a href="redwines.html" class="icon-link">
+                    <i class="fa fa-wine-bottle" ></i>
+                </a>
+                <a href="rosewines.html" class="icon-link">
+                    <i class="fa fa-wine-bottle" style="color: rosybrown;"></i>
+                </a>
+                <a href="whitewines.html" class="icon-link">
+                    <i class="fa fa-wine-bottle" style="color: white;"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div h1="div1" style="width: 100%; text-align: center; background-color: #591D2B; ">
+            <id style="color: white; text-align: center; font-size: 55px; font-family: Calibri"><b>יין אדום</b></id></br>
+        </div>
+        <br>
+    </header>
+    
+    
+    
+    <div class="container">
+
+        <!-- Notification for Cart -->
+        <div id="cart-notification" class="hidden">
+            <a href="cart.html"><h2>Cart</h2></a>
+            <p id="cart-message"></p>
+            <div id="cart-items"></div>
+            <h2>Total: <span id="total-cost">0</span>₪</h2>
+            <button onclick="hideNotification()">✖</button>
+        </div>
+    
+        <!-- Section where items will be displayed -->
+        <section id="items-container">
+            <!-- Items will be displayed here using JavaScript -->
+        </section>
+    
+    </div>
+    
+
+    <br><br>
+    <div h1="div1" style="width:100%;  text-align:center; background-color:#5E4B3C ; ">
+        <h2 style="color: antiquewhite; font-size: 18px; font-family: Calibri; text-align: center; margin: 0px">
+            🍷<br>Wine & Co.<br>© 2025 by rotem horner</h2><br>
+    </div>
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <script src="script_indexeddb.js"></script>
+</body>
+</html>

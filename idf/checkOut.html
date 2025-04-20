@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wine & Co.</title>
+  <link rel="icon" type="image/png" href="imgs/icon1.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .overlay.visible {
+        display: flex !important;
+    }
+
+    .summary-popup {
+        background: #fff0f3;
+        color: #591D2B;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        text-align: right;
+    }   
+
+
+    .summary-popup h2 {
+          margin-top: 0;
+    }
+    .summary-popup img {
+        width: 40px;
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+    .summary-popup .close-btn {
+        margin-top: 20px;
+        background-color: #591D2B;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body >
+    <header id="checkout-header">
+        <div class="logo">
+            <img src="imgs/logo1.png" alt="Shop Logo" style="width: 100px;"> <!-- Replace with your shop's logo -->
+        </div>
+        <div class="cart-icon">
+            <i class="fas fa-shopping-bag"></i> <!-- Font Awesome Cart Icon -->
+        </div>
+    </header>
+    <div class="checkout-container">
+       
+            <!-- Left Half: Cart Section -->
+        <div class="left-half" id="cart-display" style="direction: rtl;">
+            <h2>פריטים בסל:</h2>
+            <div id="cart-items"></div> <!-- Items dynamically displayed here -->
+            <!-- Discount Code Input -->
+            <div class="discount-code">
+                <input type="text" id="discount-code" name="discount-code" placeholder="קוד הנחה" >
+                <button id="apply-discount" >החל</button>
+            </div>
+            <div id="discount-status" class="hidden"> <!-- Hidden by default -->
+                <p></p> <!-- This will hold the status message -->
+            </div>
+            
+            <!-- Summary Items -->
+            <div class="summary-item">
+                <h3>סך ביניים: <span id="total-cost">0</span></h3></div>
+            <div class="summary-item">
+                <h3>משלוח: <span id="delivery-fee">0</span></h3></div>
+            <div class="summary-item total">
+                <h2>סך הכל: <span id="final-total">0</span></h2></div>
+            <!-- Delivery Options -->
+            <div id="delivery-options">
+                <h2>בחרו אפשרות משלוח:</h2>
+                <label>
+                    <input type="radio" name="delivery" value="pickup" checked> איסוף מחנות (חינם)
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="delivery" value="shipping"> משלוח לכתובת (₪19.9 / חינם מעל ₪250)
+                </label>
+            </div>
+        </div>
+        <!-- Right Half: Forms Section -->
+        <div class="right-half">
+            <div class="step-indicator">
+                <span class="step active">התחברות</span>
+                <span class="step">משלוח</span>
+                <span class="step">תשלום</span>
+            </div>
+            <!-- Step 1: Login -->
+            <div class="checkout-step" id="login-step">
+                <br><h2 style="font-family: Calibri; margin:0px; font-size: 70px;">התחברות למערכת</h2><br><br>
+                <form id="login-form" onsubmit="handleLogin(event, 'checkout')">
+                    <p>פעם ראשונה באתר? <a href="singin.html?from=checkout">להרשמה</a></p>
+                    <br><label for="username">שם משתמש</label><br>
+                    <input type="text" id="username" name="username" placeholder="הכניסו שם משתמש" required>
+                    <br><label for="password">סיסמה</label><br>
+                    <input type="password" id="password" name="password" placeholder="הכניסו סיסמה" required>
+                    <br><br><button type="submit" name="submit" id="submit">כניסה</button><br><br><br>
+                </form>
+            </div>
+            
+            <!-- Step 2: Address -->
+            <div class="checkout-step hidden" id="address-step">
+                <h2 style="font-family: Calibri; margin:0px; font-size: 70px;">פרטי משלוח</h2>
+                <form id="address-form" style="text-align: center; margin: 0%;">
+                    <button type="button" class="back-button" data-step="login-step">
+                        <i class="fas fa-arrow-left"></i>
+                    </button><br>
+                    <label for="city">עיר</label><br>
+                    <input type="text" id="city" placeholder="הכניסו עיר" required>
+                    <br>
+                    <label for="street">רחוב ומספר בית</label><br>
+                    <input type="text" id="street" placeholder="הכניסו רחוב ומספר בית" required><br>
+                    <label for="postal-code">מיקוד</label><br>
+                    <input type="text" id="postal-code" placeholder="הכניסו מיקוד" required>
+                    <br>
+                    <button type="submit">המשך לתשלום</button><br><br>
+                    
+                </form>
+            </div>
+            <!-- Step 3: Payment -->
+            <div class="checkout-step hidden" id="payment-step">
+                <br><h2 style="font-family: Calibri; margin:0px; font-size: 70px;">פרטי תשלום</h2><br><br>
+                <form id="payment-form">
+                    <button type="button" class="back-button" data-step="address-step">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>                
+                    <label for="card-number">Card Number:</label><br>
+                    <input type="text" id="card-number" required><br>
+                    <label for="expiry-date">Expiry Date:</label><br>
+                    <input type="text" id="expiry-date" required><br>
+                    <label for="cvv">CVV:</label><br>
+                    <input type="text" id="cvv" required><br>
+                    <button type="submit" onsubmit="displayOrders();">Complete Purchase</button><br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Order Summary Popup -->
+    <div id="order-summary-overlay" class="overlay hidden">
+        <div class="summary-popup" id="order-summary-content">
+        <h2>הזמנתך התקבלה בהצלחה!</h2>
+        <div id="order-details"></div>
+        <button class="close-btn">חזרה לדף הבית</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <script src="script_indexeddb.js" defer></script>
+    <script>
+        let discount = 0;//משתנה גלובליייי
+        async function showOrderSummary() {
+            const cart = await db.cart.toArray();
+            const delivery = await db.deliveryInfo.get("info");
+            const user = await db.session.get("currentUser");
+            const shippingMethod = document.querySelector("input[name='delivery']:checked")?.value === "shipping" ? "משלוח" : "איסוף";
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const discountedTotal = total - (typeof discount !== 'undefined' ? discount : 0);
+            const deliveryFee = shippingMethod === "משלוח" && discountedTotal < 250 ? 19.9 : 0;
+            const finalTotal = discountedTotal + deliveryFee;
+
+            const container = document.getElementById("order-details");
+            container.innerHTML = `
+                <p><strong>שם משתמש:</strong> ${user?.username || "לא ידוע"}</p>
+                <p><strong>כתובת:</strong> ${delivery?.city || ""}, ${delivery?.street || ""}, ${delivery?.postalCode || ""}</p>
+                <p><strong>שיטת משלוח:</strong> ${shippingMethod}</p>
+                <p><strong>סכום לתשלום:</strong> ₪${finalTotal.toFixed(2)}</p>
+                <h3>מוצרים:</h3>
+                <ul>
+                ${cart.map(item => `<li><img src="${item.pic}" alt="${item.name}" /> ${item.name} - x${item.quantity}</li>`).join("")}
+                </ul>
+            `;
+
+            setTimeout(() => {
+                const overlay = document.getElementById("order-summary-overlay");
+                overlay.classList.remove("hidden");
+                overlay.classList.add("visible");
+            }, 1000);
+            document.querySelector(".close-btn").addEventListener("click", async () => {
+                await db.session.delete("currentUser"); // ניקוי סשן
+                window.location.href = "homepage.html";
+            });
+
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            //תצוגה סופית צ'אק אאוט
+            const discountCodeInput = document.getElementById("discount-code");
+            const applyDiscountButton = document.getElementById("apply-discount");
+            const discountStatus = document.getElementById("discount-status");
+            async function applyDiscount() {
+                const code = discountCodeInput.value.trim();
+                if (code === "new15") {
+                const cart = await db.cart.toArray();
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                discount = total * 0.15;
+                discountStatus.textContent = "Discount applied successfully";
+                discountStatus.classList.remove("hidden");
+                discountStatus.style.color = "green";
+                } else {
+                discount = 0;
+                discountStatus.textContent = "Invalid discount code";
+                discountStatus.classList.remove("hidden");
+                discountStatus.style.color = "red";
+                } await displayCart("checkout");
+            }
+            document.querySelectorAll("input[name='delivery']").forEach(option => {
+                option.addEventListener("change", async () => {
+                await displayCart("checkout");
+            });});
+            applyDiscountButton.addEventListener("click", applyDiscount);
+            displayCart("checkout");
+            //stepsss
+            const steps = document.querySelectorAll(".checkout-step");
+            const backButtons = document.querySelectorAll(".back-button");
+            // כפתורי חזרה
+            backButtons.forEach(button => {
+                button.addEventListener("click", (event) => {
+                    const previousStepId = button.getAttribute("data-step"); // Get the previous step ID
+                    const previousStepIndex = Array.from(steps).findIndex(step => step.id === previousStepId); // Find the index
+                    showStep(previousStepIndex); // Go back to the previous step
+                });
+            }); // Address form submission
+            document.getElementById("address-form").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const deliveryInfo = {
+                    id: "info", 
+                    city: document.getElementById("city").value,
+                    street: document.getElementById("street").value,
+                    postalCode: document.getElementById("postal-code").value,
+                };
+                await db.deliveryInfo.put(deliveryInfo);
+                showStep(2);
+            }); // Payment form submission
+            document.getElementById("payment-form").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const cardNumber = document.getElementById("card-number").value;
+                const expiryDate = document.getElementById("expiry-date").value;
+                const cvv = document.getElementById("cvv").value;
+                await db.paymentDetails.put({ id: "info", cardNumber, expiryDate, cvv });
+                //אוסף נתוני הזמנהה
+                const user = await db.session.get("currentUser");
+                const delivery = await db.deliveryInfo.get("info");
+                const payment = await db.paymentDetails.get("info");
+                const cart = await db.cart.toArray();
+
+                const itemsList = cart.map(item => `${item.name} x${item.quantity}`).join(", ");
+                const totalCost = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const deliveryOption = document.querySelector("input[name='delivery']:checked");
+                const shippingMethod = deliveryOption?.value === "shipping" ? "משלוח" : "איסוף";
+                // שמירת הזמנה בטבלה
+                await db.orders.add({
+                    username: user?.username || "לא ידוע",
+                    email: user?.email || "לא ידוע",
+                    address: `${delivery?.city || ""}, ${delivery?.street || ""}, ${delivery?.postalCode || ""}`,
+                    items: itemsList,
+                    totalCost,
+                    shippingMethod,
+                    cardNumber,
+                    expiryDate
+                });
+                showOrderSummary();
+                await db.cart.clear();
+                await db.session.clear();
+            });
+            (async () => {
+                const session = await db.session.get("currentUser");
+                const urlParams = new URLSearchParams(window.location.search);
+                let startStep = parseInt(urlParams.get("step") || 0);
+                if (session) {
+                startStep = 1; // דילוג להתחברות
+                }
+                showStep(startStep);
+            })();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wine & Co.</title>
+  <link rel="icon" type="image/png" href="imgs/icon1.jpg">  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body style="direction: rtl; background-color: #D7D1C6;">
+  <header id="checkout-header">
+    <div class="logo">
+      <a href="homepage.html"><img src="imgs/logo1.png" style=" width: 100px; " alt="Logo" /></a>
+    </div>
+    <div class="cart-icon">
+        <i class="fas fa-user"></i> <!-- Font Awesome Cart Icon -->
+    </div>
+  </header>
+  <main>
+  <form id="login-form" onsubmit="handleLogin(event)"style="border: double; text-align: center; align-self: center;">
+      <br><h1 style="font-family: Calibri; margin:0px; font-size: 70px;">טופס התחברות למערכת</h1>
+      <h2 style="font-family: Calibri; margin:0px; font-size: 18px">פעם ראשונה באתר?<font color="#591D2B"> <a href="singin.html">להרשמה</a> </h2><br/>
+      <br>
+      <label for="username">שם משתמש</label><br>
+      <input type="text" id="username" name="username" placeholder="הכניסו שם משתמש" required>
+      <br><label for="password">סיסמה</label><br>
+      <input type="password" id="password" name="password" placeholder="הכניסו סיסמה" required>
+
+
+      <br><br>
+      <button type="submit" name="submit" id="submit">כניסה</button>
+      <br/>
+      <input type="reset" name="reset" id="reset" value="ניקוי טופס" class="butstyle" style="margin-bottom: 15px"/>
+      <br />
+  </form>
+  </main>
+  
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <script src="script_indexeddb.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wine & Co.</title>
+  <link rel="icon" type="image/png" href="imgs/icon1.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    #cart-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* מרכז את כל המוצרים */
+      gap: 20px;
+    }
+
+    .cart-item {
+      width: 200px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <header id="checkout-header">
+    <div class="logo">
+      <a href="homepage.html"><img src="imgs/logo1.png" style=" width: 100px; " alt="Logo" /></a>
+    </div>
+    <div class="cart-icon">
+        <i class="fas fa-shopping-bag"></i> <!-- Font Awesome Cart Icon -->
+    </div>
+  </header>
+  <main>
+    <h1 >סל הקניות שלך:</h1>
+    <div id="cart-container"></div> <!-- Cart items will be displayed dynamically -->
+    <div id="order-summary" >
+        <h2>סיכום הזמנה</h2>
+        <p> סך ביניים: <span id="total-cost"></span></p>
+        <p> דמי משלוח: <span id="delivery-fee"></span></p>
+        <p>סך הכל: <span id="final-total"></span></p>
+    </div>
+    <button style="align-self: center; width: 100%;" onclick="goToCheckout()">המשך לתשלום</button>
+
+  </main>
+  
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <script src="script_indexeddb.js" defer></script>
+  <script>
+    async function goToCheckout() {
+      const cart = await db.cart.toArray();
+      if (cart.length === 0) {
+        alert("הסל שלך ריק. אנא הוסיפו מוצרים לפני מעבר לתשלום.");
+      } else {
+        window.location.href = "checkOut.html";
+      }
+    }
+
+  </script>
+</body>
+</html>
