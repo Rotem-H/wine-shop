@@ -17,20 +17,6 @@ a:link, a:visited {
     text-decoration: none;
     display: inline-block;
 }
-@media (max-width: 600px) {
-    .item {
-        flex: 0 1 100%; /* Items take up full width on small screens */
-        margin: 5px 0; /* Adjust margins for vertical layout */
-    }
-    .checkout-container {
-        flex-direction: column; /* Stack columns vertically */
-    }
-
-    .left-half, .right-half {
-        width: 100%; /* Full width for each section */
-        margin-bottom: 20px; /* Space between sections */
-    }
-}
 
 #items-container {
     display: flex; /* Makes items align horizontally */
@@ -329,9 +315,6 @@ check-out pageeeee<3
     color: #e0e0e0;
 }
 
-
-
-
 p, h1, h2 {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -480,8 +463,85 @@ p, h1, h2 {
   }
   .next {
     right: 0;
-  }
+}
   .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.8);
-  }
+}
+@media (max-width: 768px) {
+
+    #items-container {
+        justify-content: center;
+    }
   
+    .item {
+        width: 45%;
+        margin: 2.5%;
+    }
+  
+    #cart-items, #cart-container {
+        flex-direction: column;
+        align-items: center;
+    }
+  
+    .cart-item {
+        width: 90%;
+        margin-bottom: 15px;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    .checkout-container {
+        flex-direction: column; /* Stack columns vertically */
+    }
+
+    .left-half, .right-half {
+        width: 100%; /* Full width for each section */
+        margin-bottom: 20px; /* Space between sections */
+    }
+    /**navbarrrrr displayyyy*/
+    .logo {
+        width: 165px !important;
+    }
+  
+    .icon-link i {
+      font-size: 30px;
+    }
+    /*formsssssssssssssssssssssssss*/
+    form {
+        width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+    
+      input[type="text"],
+      input[type="password"],
+      input[type="email"] {
+        width: 100%;
+        font-size: 18px;
+        padding: 12px;
+        margin: 10px 0;
+      }
+    
+      button, input[type="submit"], input[type="reset"] {
+        /*width: 100%;
+        padding: 14px;*/
+        font-size: 18px;
+        margin-top: 10px;
+      }
+    
+      h1, h2 {
+        font-size: 20px;
+        text-align: center;
+      }
+    
+      label {
+        font-size: 16px;
+      }
+    
+      .popup-content {
+        width: 90% !important;
+        max-width: none;
+        padding: 20px;
+      }
+}
