@@ -30,7 +30,7 @@ function displayItems(category) {
         itemDiv.className = "item";
         itemDiv.innerHTML = `
           <div class="product-img-wrapper">
-            <img src="${item.pic}" style="height: 50%; text-align: center;"/>
+            <img src="${item.pic}"/>
           </div>
             <p>${item.name}</p>
             <p class="title">${item.origin}</p>
