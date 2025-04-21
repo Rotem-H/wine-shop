@@ -29,9 +29,7 @@ function displayItems(category) {
         const itemDiv = document.createElement("div");
         itemDiv.className = "item";
         itemDiv.innerHTML = `
-          <div class="product-img-wrapper">
-            <img src="${item.pic}"/>
-          </div>
+            <img src="${item.pic}" style="height: 50%; text-align: center;"/>
             <p>${item.name}</p>
             <p class="title">${item.origin}</p>
             <p>${item.price}₪</p>
