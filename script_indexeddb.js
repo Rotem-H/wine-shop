@@ -13,7 +13,7 @@ db.version(5).stores({
 });
 function getRedirectMode() {
     const params = new URLSearchParams(window.location.search);
-    return params.get("from") || "homepage";
+    return params.get("from") || "index";
 }
 
 // משתנה items שנטען מה-DB
@@ -29,7 +29,7 @@ function displayItems(category) {
         const itemDiv = document.createElement("div");
         itemDiv.className = "item";
         itemDiv.innerHTML = `
-            <img src="${item.pic}" style="height: 50%; text-align: center; margin: 20px;"/>
+            <img src="${item.pic}" style="height: 50%; text-align: center; margin-top: 10px;"/>
             <p>${item.name}</p>
             <p class="title">${item.origin}</p>
             <p>${item.price}₪</p>
@@ -241,7 +241,7 @@ async function handleSignup(event) {
     await db.users.put({ username: newUsername, password: newPassword, email: newEmail });
     await db.session.put({ key: "currentUser", username: newUsername, email: newEmail});
   
-    const mode = getRedirectMode(); // homepage או checkout
+    const mode = getRedirectMode(); // index או checkout
     const popup = document.getElementById("new-user-popup");
     if (popup) popup.classList.remove("hidden");
     document.getElementById("close-popup").addEventListener("click", () => {
@@ -249,7 +249,7 @@ async function handleSignup(event) {
         if (mode === "checkout") {
             window.location.href = "checkOut.html?step=1"; // נשלח אותו חזרה לצ'קאאוט
         } else {
-        window.location.href = "homepage.html";}
+        window.location.href = "index.html";}
     });
 }
   
@@ -269,7 +269,7 @@ async function handleLogin(event, mode = "homepage") {
         //window.location.href = "checkOut.html";
         showStep(1);//לדלג ישר לשלב הבאאאאא
       }else{
-        window.location.href = "homepage.html";}
+        window.location.href = "index.html";}
 
     } else {
       alert("שם משתמש או סיסמה שגויים.");
