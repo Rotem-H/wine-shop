@@ -360,8 +360,13 @@ p, h1, h2 {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 5px;
-    width: 75%; /* Adjust width as needed */
-    margin: 20px auto; /* Center the summary */
+    width: 75%; 
+    margin: 20px auto; 
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px; 
+    justify-items: center; 
+    padding: 20px;
 }
 
 /* Discount Code */
@@ -524,13 +529,17 @@ p, h1, h2 {
         flex-direction: column;
         text-align: center;
     }
+    #cart-container{
+        grid-template-columns: repeat(2, 1fr); 
+
+    }
     .checkout-container {
-        flex-direction: column; /* Stack columns vertically */
+        flex-direction: column; 
     }
 
     .left-half, .right-half {
-        width: 100%; /* Full width for each section */
-        margin-bottom: 20px; /* Space between sections */
+        width: 100%; 
+        margin-bottom: 20px; 
     }
     /**navbarrrrr displayyyy*/
     .logo {
