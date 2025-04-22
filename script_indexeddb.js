@@ -345,15 +345,15 @@ async function populateDefaultData() {
 }
 
 
-  // בדיקה אם יש משתמש admin
-const adminExists = await db.users.get("Manager123");
-    if (!adminExists) {
-        await db.users.put({
-            username: "Manager123",
-            password: "Manager123",
-            email: "Manager123@wine.com"
-        });
-  }
 document.addEventListener("DOMContentLoaded", async () => {
     await populateDefaultData();
+    // בדיקה אם יש משתמש admin
+    const adminExists = await db.users.get("Manager123");
+    if (!adminExists) {
+        await db.users.put({
+              username: "Manager123",
+              password: "Manager123",
+              email: "Manager123@wine.com"
+        });
+    }
 });
