@@ -282,7 +282,7 @@ async function handleLogin(event, mode = "homepage") {
 async function logout() {
     await db.session.clear();
     await db.cart.clear();
-    window.location.href = "homepage.html";
+    window.location.href = "index.html";
 }
   
 //בודקת אם המשתמש מחובר וככה יודעת אם להעביר אותו ישירות לשלב הבא בצאק אאוטטט
