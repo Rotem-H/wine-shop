@@ -162,6 +162,11 @@ button {
     gap: 10px;
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px; 
+    justify-items: center; 
+    padding: 20px;
 }
 .cart-item img {
     width: 50px;
@@ -362,11 +367,6 @@ p, h1, h2 {
     border-radius: 5px;
     width: 75%; 
     margin: 20px auto; 
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px; 
-    justify-items: center; 
-    padding: 20px;
 }
 
 /* Discount Code */
