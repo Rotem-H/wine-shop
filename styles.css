@@ -145,6 +145,17 @@ button {
     display: flex;
     padding-bottom: 10px;
 }
+.cart-notification-header {
+    position: sticky;
+    top: 0;
+    background-color: #fff0f3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    z-index: 10;
+}
 #cart-items ,#cart-container{
     display: flex;
     grid-template-columns: 1fr 2fr; /* Image column and text column */
