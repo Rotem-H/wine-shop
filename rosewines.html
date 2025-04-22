@@ -66,11 +66,13 @@
 
         <!-- Notification for Cart -->
         <div id="cart-notification" class="hidden">
-            <a href="cart.html"><h2>Cart</h2></a>
+            <div class="cart-notification-header">
+                <button onclick="hideNotification()">✖</button>
+                <a href="cart.html" class="go-to-cart">Cart 🛒</a>
+            </div>
             <p id="cart-message"></p>
             <div id="cart-items"></div>
             <h2>Total: <span id="total-cost">0</span>₪</h2>
-            <button onclick="hideNotification()">✖</button>
         </div>
     
         <!-- Section where items will be displayed -->
