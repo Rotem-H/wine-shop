@@ -29,7 +29,7 @@ function displayItems(category) {
         const itemDiv = document.createElement("div");
         itemDiv.className = "item";
         itemDiv.innerHTML = `
-            <img src="${item.pic}" style="height: 50%; text-align: center;"/>
+            <img src="${item.pic}" style="height: 50%; text-align: center; margin: 20px;"/>
             <p>${item.name}</p>
             <p class="title">${item.origin}</p>
             <p>${item.price}₪</p>
