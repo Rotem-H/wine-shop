@@ -165,6 +165,17 @@ button {
     object-fit: contain;
     object-position: center;
 }
+.cart-notification-header {
+    position: sticky;
+    top: 0;
+    background-color: #fff0f3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    z-index: 10;
+}
 
 .cart-item p button {
     color: black;
