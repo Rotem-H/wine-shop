@@ -146,8 +146,8 @@ async function displayCart(mode = "full") {
       itemDiv.innerHTML = `
         <img src="${item.pic}" alt="${item.name}">
         <div class="cart-item-details">
-          <p><strong>${item.name}</strong></p><br>
-          <p>₪${item.price}</p><br>
+          <p><strong>${item.name}</strong></p>
+          <p>₪${item.price}</p>
           <p class="title">${item.origin}</p>
           ${buttonsHtml}
         </div>
