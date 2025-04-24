@@ -2,9 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Wine & Co.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="imgs/icon1.png"> 
+    <title>Wine & Co.</title>
+    <link rel="icon" type="image/png" href="imgs/icon1.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -39,7 +39,7 @@
         
             <!-- Center Section: Logo -->
             <div class="center-section">
-                <a href="index.html"><img src="imgs/logo1.png" style=" width: 50%; " alt="Logo" class="logo" /></a>
+                <a href="index.html"><img src="imgs/logo1.png" style=" width: 50%;" loading="lazy" alt="Logo" class="logo" /></a>
             </div>
         
             <!-- Right Section: Search Bar -->
@@ -66,13 +66,11 @@
 
         <!-- Notification for Cart -->
         <div id="cart-notification" class="hidden">
-            <div class="cart-notification-header">
-                <a href="cart.html"><h2>🛒 Cart</h2></a><br><br>
-                <button onclick="hideNotification()">✖</button>
-                <br><h2>Total: <span id="total-cost">0</span>₪</h2>
-            </div>
+            <a href="cart.html"><h2>Cart</h2></a>
             <p id="cart-message"></p>
             <div id="cart-items"></div>
+            <h2>Total: <span id="total-cost">0</span>₪</h2>
+            <button onclick="hideNotification()">✖</button>
         </div>
     
         <!-- Section where items will be displayed -->
@@ -90,6 +88,5 @@
             🍷<br>Wine & Co.<br>© 2025 by rotem horner</h2><br>
     </div>
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
-    <script src="script_indexeddb.js" defer></script>
-</body>
+    <script src="script_indexeddb.js"></script></body>
 </html>
