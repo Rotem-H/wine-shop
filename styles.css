@@ -152,6 +152,7 @@ cartsssss
     padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
     z-index: 10;
+    flex-direction: column;
 }
 
 #cart-container, #cart-items {
@@ -219,7 +220,6 @@ cartsssss
 }
 .remove-btn:hover {
     color: #b30000;
-    transform: scale(1.1);
 }
   
 /*### General Navbar Styling ###
