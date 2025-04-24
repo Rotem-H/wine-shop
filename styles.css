@@ -5,7 +5,6 @@ body {
 section#items {
     padding: 20px;
 }
-
 .hidden {
     display: none; /* Hide it completely when not in use */
 }
@@ -16,13 +15,14 @@ a:link, a:visited {
     text-decoration: none;
     display: inline-block;
 }
-
+/*items displaysssss*/
 #items-container {
-    display: flex; /* Makes items align horizontally */
+    display: flex; 
     flex-wrap: wrap;
-    gap: 0px; /* Adds space between items */
-    justify-content: center; /* Aligns items to the left (or use center/right as needed) */
+    gap: 0px; 
+    justify-content: center; 
 }
+
 .item {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 1%;
@@ -33,14 +33,12 @@ a:link, a:visited {
     width: 20%;
     align-self: center;
     flex: 0 1 auto;
-    box-sizing: border-box; /* Ensures padding/margin don't affect width */
+    box-sizing: border-box; 
 }
-
 .title {
     color: grey;
     text-align: center;
 }
-
 .item button {
     border: none;
     outline: 0;
@@ -52,17 +50,18 @@ a:link, a:visited {
     cursor: pointer;
     width: 90%;
 }
-
 .item button:hover {
     background-color: #555;
 }
+
+
+/*formssssss*/
 form {
     width: 500px;
     background-color:#D7D1C6 ;
     margin: 0 auto;
     justify-self: center;
 }
-
 .butstyle {
     width: 90px;
     background-color: mistyrose;
@@ -70,7 +69,6 @@ form {
     margin: 3px, 8px;
     cursor:pointer;
 }
-
 .butstyle:hover{
     background-color: PeachPuff;
     border: none;
@@ -85,7 +83,9 @@ input[type=text], input[type=password], input[type=email] {
     box-sizing: border-box;
     background-color: #D7D1C6;
     margin-bottom: 15px;
+
 }
+
 button {
     background-color: #705c64;
     color: white;
@@ -101,7 +101,10 @@ button {
     opacity: 0.8;
 }
 
-/*##############################################*/
+
+/*######################
+cartsssss
+########################*/
 #cart-notification {
     position: fixed;
     top: 20px; /* Top of the screen */
@@ -121,7 +124,7 @@ button {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px 0;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
     align-items: center;
     width: 150px;
@@ -130,12 +133,15 @@ button {
     align-self: center;
     flex: 0 1 auto;
     box-sizing: border-box;
-    /*height: 220px;*/
+    height: 300px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     padding-bottom: 10px;
+    justify-content: space-between;
+    position: relative;
 }
+
 .cart-notification-header {
     position: sticky;
     top: 0;
@@ -154,26 +160,13 @@ button {
     gap: 20px;
     justify-items: center;
     padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 #cart-items {
     grid-template-columns: repeat(3, 1fr);
-}
-  
-.cart-item {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 220px;
-    min-height: 330px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
-    box-sizing: border-box;
-    position: relative;
 }
   
 .cart-item img {
@@ -185,7 +178,7 @@ button {
   
 .cart-item-details {
     flex: 1;
-}
+} 
 .cart-notification-header {
     position: sticky;
     top: 0;
@@ -197,6 +190,7 @@ button {
     border-bottom: 1px solid #ccc;
     z-index: 10;
 }
+
 .cart-item p button {
     color: black;
     cursor: pointer;
@@ -222,11 +216,12 @@ button {
     align-self: center;
     left: 50%;
     transform: translateX(-50%);
-} 
+}
 .remove-btn:hover {
     color: #b30000;
     transform: scale(1.1);
 }
+  
 /*### General Navbar Styling ###
 #################################
 #################################*/
@@ -276,39 +271,37 @@ button {
 check-out pageeeee<3
 ##########################*/
 .checkout-container {
-    display: flex; /* Create a two-column layout */
-    flex-wrap: wrap; /* Ensure responsiveness */
-    gap: 20px; /* Add space between columns */
-    width: 90%; /* Adjust width */
-    max-width: 1200px; /* Limit the maximum width */
-    margin: 20px auto; /* Center content on the page */
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    width: 90%;
+    max-width: 1200px; 
+    margin: 20px auto; 
     padding: 20px;
-    background-color: #fff; /* White background */
+    background-color: #fff; 
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: inherit;
     text-align: center;
 }
 
-/* Left Half: Cart Section */
 .left-half {
-    flex: 1; /* Take up half the space */
+    flex: 1; 
     padding: 20px;
-    background-color: #f5f5f5; /* Light gray background */
+    background-color: #f5f5f5; 
     border-radius: 8px;
     height: 100%;
-    overflow-y: auto; /* Scroll if content overflows */
+    overflow-y: auto; 
 }
 
-/* Right Half: Forms Section */
 .right-half {
-    flex: 1; /* Take up half the space */
+    flex: 1; 
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
 }
 
-/* Step Indicator */
+/* Step Indicatorssssss- checkout page */
 .step-indicator {
     display: flex;
     justify-content: space-between;
@@ -331,7 +324,6 @@ check-out pageeeee<3
     color: white;
 }
 
-/* Checkout Forms */
 .checkout-step {
     display: none; /* Hide all steps initially */
 }
@@ -371,7 +363,7 @@ p, h1, h2 {
     margin: 20px auto; 
 }
 
-/* Discount Code */
+/* discount codeeeee */
 .discount-code {
     display: flex;
     margin-bottom: 15px;
@@ -401,12 +393,9 @@ p, h1, h2 {
     margin-bottom: 8px;
     font-size: 14px;
 }
-
 .summary-item span {
     color: #333;
 }
-
-/* Total */
 .summary-item.total {
     font-size: 16px;
     font-weight: bold;
@@ -429,13 +418,13 @@ p, h1, h2 {
 }
 
 .popup.hidden {
-    display: none; /* הפופ-אפ מוסתר כברירת מחדל */
+    display: none; 
 }
 
 .popup-content h2 {
     font-size: 24px;
     font-weight: bold;
-    color: #4caf50; /* ירוק להדגשה */
+    color: #4caf50; 
 }
 
 .popup-content p {
@@ -464,9 +453,6 @@ p, h1, h2 {
     background-color: #D7D1C6; 
     padding: 10px 20px;
 }
-
-
-
 
 /*home page galleryyyyyyyyyyyyyyyy*/
 .slideshow-container {
@@ -523,12 +509,17 @@ p, h1, h2 {
         flex-direction: column;
         align-items: center;
         grid-template-columns: repeat(2, 1fr); 
+        justify-items: center;
+        gap: 3px;
+        padding: 0%;
     }
     #cart-display {
         align-self: center;
         text-align: center;
         margin: 0%;
     }
+
+  
     .cart-item {
         width: 100%;
         margin-bottom: 15px;
@@ -536,23 +527,26 @@ p, h1, h2 {
         flex-direction: column;
         text-align: center;
         align-items: center;
-        width: 150px;
-        height: 250px;
+        width: 125px;
+        height: 300px;
     }
     .cart-item img{
-        /*width: 80px;*/
         height: 80px;
         object-fit: contain;
         margin: 0 auto;
         display: block;
     }
+  
     .cart-item-details {
         padding-top: 10px;
     }
+
+
     .checkout-container {
         flex-direction: column; 
         align-items: center;
     }
+
     .left-half, .right-half {
         width: 100%; 
         margin-bottom: 20px; 
@@ -561,6 +555,7 @@ p, h1, h2 {
     .logo {
         width: 165px !important;
     }
+  
     .icon-link i {
       font-size: 30px;
     }
@@ -582,17 +577,13 @@ p, h1, h2 {
       }
     
       button, input[type="submit"], input[type="reset"] {
-        /*width: 100%;
-        padding: 14px;*/
         font-size: 18px;
         margin-top: 10px;
       }
-    
       h1, h2 {
         font-size: 20px;
         text-align: center;
       }
-    
       label {
         font-size: 16px;
       }
@@ -621,5 +612,4 @@ p, h1, h2 {
     #cart-notification p {
         font-size: 18px;
     }
-
 }
