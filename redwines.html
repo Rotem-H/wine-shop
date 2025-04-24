@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         #cart-items ,#cart-container{
-             flex-wrap: wrap;        /* שורה חדשה אחרי 2 פריטים */
-            justify-content: center;/
+             flex-wrap: wrap;       
+            justify-content: center;
         }
         .cart-item{
-            flex: 0 0 calc(50% - 20px); /* שניים בשורה */
+            flex: 0 0 calc(50% - 20px);
         }
+        #cart-items {
+            grid-template-columns: repeat(2, 1fr);
+        } 
     </style>
 </head>
 
@@ -68,11 +71,13 @@
 
         <!-- Notification for Cart -->
         <div id="cart-notification" class="hidden">
-            <a href="cart.html"><h2>Cart</h2></a>
+            <div class="cart-notification-header">
+                <a href="cart.html"><h2>🛒 Cart</h2></a>
+                <button onclick="hideNotification()">✖</button>
+                <h2>Total: <span id="total-cost">0</span>₪</h2>
+            </div>
             <p id="cart-message"></p>
             <div id="cart-items"></div>
-            <h2>Total: <span id="total-cost">0</span>₪</h2>
-            <button onclick="hideNotification()">✖</button>
         </div>
     
         <!-- Section where items will be displayed -->
