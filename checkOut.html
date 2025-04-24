@@ -58,7 +58,7 @@
 <body >
     <header id="checkout-header">
         <div class="logo">
-            <img src="imgs/logo1.png" alt="Shop Logo" style="width: 100px;"> <!-- Replace with your shop's logo -->
+            <img src="imgs/logo1.png" alt="Shop Logo" loading="lazy" style="width: 100px;"> <!-- Replace with your shop's logo -->
         </div>
         <div class="cart-icon">
             <i class="fas fa-shopping-bag"></i> <!-- Font Awesome Cart Icon -->
@@ -186,7 +186,7 @@
                 <p><strong>סכום לתשלום:</strong> ₪${finalTotal.toFixed(2)}</p>
                 <h3>מוצרים:</h3>
                 <ul>
-                ${cart.map(item => `<li><img src="${item.pic}" alt="${item.name}" /> ${item.name} - x${item.quantity}</li>`).join("")}
+                ${cart.map(item => `<li><img src="${item.pic}" alt="${item.name}" loading="lazy"/> ${item.name} - x${item.quantity}</li>`).join("")}
                 </ul>
             `;
 
